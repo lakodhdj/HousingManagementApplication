@@ -1,0 +1,56 @@
+﻿<Window x:Class="HousingManagementApp.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="История Выполнения" Height="450" Width="800">
+
+    <!-- Подключение внешнего ResourceDictionary с стилями -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="TitleText" 
+                   FontSize="20" 
+                   Grid.Row="0" 
+                   HorizontalAlignment="Center" 
+                   Margin="10" 
+                   Text="История выполнения" 
+                   Style="{StaticResource PageHeaderText}"/>
+
+        <!-- Фильтр -->
+        <ComboBox x:Name="FilterCombo" 
+                  Grid.Row="1" 
+                  Margin="10" 
+                  SelectionChanged="FilterCombo_SelectionChanged"
+                  Style="{StaticResource ComboBox}">
+            <!-- Здесь можно добавить элементы или привязку при необходимости -->
+        </ComboBox>
+
+        <!-- Таблица с историей -->
+        <DataGrid x:Name="HistoryGrid" 
+                  Grid.Row="2" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  Style="{StaticResource PageDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Заявка ID" Binding="{Binding RequestId}"/>
+                <DataGridTextColumn Header="Дата Начала" Binding="{Binding DateStart}"/>
+                <DataGridTextColumn Header="Дата Завершения" Binding="{Binding DateEnd}"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Request.RequestText}"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Request.Building.Address}"/>
+                <DataGridTextColumn Header="Исполнитель" Binding="{Binding WorkingGroups[0].Employee.FullName}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

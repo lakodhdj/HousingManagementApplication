@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Up0101Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="StairsAmount" Type="int" Nullable="false" />
+          <Property Name="FlatsAmount" Type="int" Nullable="false" />
+          <Property Name="Square" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="BuiltYear" Type="int" Nullable="false" />
+          <Property Name="InServiceFromYear" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="BuildingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InhabitantId" Type="int" />
+          <Property Name="WaterAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ElectricityAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PositionId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="PhoneNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inhabitant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BuildingId" Type="int" />
+          <Property Name="FlatNum" Type="int" Nullable="false" />
+          <Property Name="PhoneNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PaymentBill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InhabitantId" Type="int" />
+          <Property Name="BuildingId" Type="int" />
+          <Property Name="Period" Type="nvarchar" MaxLength="50" />
+          <Property Name="AmountDept" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AmountPayed" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="RequestText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BuildingId" Type="int" />
+          <Property Name="InhabitantId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="RequestExecution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="int" />
+          <Property Name="DateStart" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RequestStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="WorkingGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestExecutionId" Type="int" />
+          <Property Name="EmployeeId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Building__Status__52593CB8">
+          <End Role="BuildingStatus" Type="Self.BuildingStatus" Multiplicity="0..1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dept__Inhabitant__5812160E">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dept">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Positi__5AEE82B9">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__RoleId__5BE2A6F2">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inhabitan__Build__5535A963">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inhabitant">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentBi__Build__5FB337D6">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="PaymentBill" Type="Self.PaymentBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentBill">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentBi__Inhab__5EBF139D">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="PaymentBill" Type="Self.PaymentBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentBill">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__Buildin__628FA481">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__Inhabit__6383C8BA">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__StatusI__6477ECF3">
+          <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestEx__Reque__6754599E">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
+          <End Role="RequestExecution" Type="Self.RequestExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestExecution">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkingGr__Emplo__6B24EA82">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="WorkingGroup" Type="Self.WorkingGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingGroup">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkingGr__Reque__6A30C649">
+          <End Role="RequestExecution" Type="Self.RequestExecution" Multiplicity="0..1" />
+          <End Role="WorkingGroup" Type="Self.WorkingGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestExecution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingGroup">
+              <PropertyRef Name="RequestExecutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Up0101ModelContainer">
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuildingStatus" EntityType="Self.BuildingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inhabitant" EntityType="Self.Inhabitant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentBill" EntityType="Self.PaymentBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestExecution" EntityType="Self.RequestExecution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingGroup" EntityType="Self.WorkingGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Building__Status__52593CB8" Association="Self.FK__Building__Status__52593CB8">
+            <End Role="BuildingStatus" EntitySet="BuildingStatus" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dept__Inhabitant__5812160E" Association="Self.FK__Dept__Inhabitant__5812160E">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="Dept" EntitySet="Dept" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Positi__5AEE82B9" Association="Self.FK__Employee__Positi__5AEE82B9">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__RoleId__5BE2A6F2" Association="Self.FK__Employee__RoleId__5BE2A6F2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inhabitan__Build__5535A963" Association="Self.FK__Inhabitan__Build__5535A963">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentBi__Build__5FB337D6" Association="Self.FK__PaymentBi__Build__5FB337D6">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="PaymentBill" EntitySet="PaymentBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentBi__Inhab__5EBF139D" Association="Self.FK__PaymentBi__Inhab__5EBF139D">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="PaymentBill" EntitySet="PaymentBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__Buildin__628FA481" Association="Self.FK__Request__Buildin__628FA481">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__Inhabit__6383C8BA" Association="Self.FK__Request__Inhabit__6383C8BA">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__StatusI__6477ECF3" Association="Self.FK__Request__StatusI__6477ECF3">
+            <End Role="RequestStatus" EntitySet="RequestStatus" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestEx__Reque__6754599E" Association="Self.FK__RequestEx__Reque__6754599E">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="RequestExecution" EntitySet="RequestExecution" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkingGr__Emplo__6B24EA82" Association="Self.FK__WorkingGr__Emplo__6B24EA82">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorkingGroup" EntitySet="WorkingGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkingGr__Reque__6A30C649" Association="Self.FK__WorkingGr__Reque__6A30C649">
+            <End Role="RequestExecution" EntitySet="RequestExecution" />
+            <End Role="WorkingGroup" EntitySet="WorkingGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Up0101Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StairsAmount" Type="Int32" Nullable="false" />
+          <Property Name="FlatsAmount" Type="Int32" Nullable="false" />
+          <Property Name="Square" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="BuiltYear" Type="Int32" Nullable="false" />
+          <Property Name="InServiceFromYear" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="BuildingStatus" Relationship="Self.FK__Building__Status__52593CB8" FromRole="Building" ToRole="BuildingStatus" />
+          <NavigationProperty Name="Inhabitant" Relationship="Self.FK__Inhabitan__Build__5535A963" FromRole="Building" ToRole="Inhabitant" />
+          <NavigationProperty Name="PaymentBill" Relationship="Self.FK__PaymentBi__Build__5FB337D6" FromRole="Building" ToRole="PaymentBill" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__Buildin__628FA481" FromRole="Building" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="BuildingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="Self.FK__Building__Status__52593CB8" FromRole="BuildingStatus" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InhabitantId" Type="Int32" />
+          <Property Name="WaterAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ElectricityAmount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Inhabitant" Relationship="Self.FK__Dept__Inhabitant__5812160E" FromRole="Dept" ToRole="Inhabitant" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PositionId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="PhoneNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="Self.FK__Employee__Positi__5AEE82B9" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Employee__RoleId__5BE2A6F2" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="WorkingGroup" Relationship="Self.FK__WorkingGr__Emplo__6B24EA82" FromRole="Employee" ToRole="WorkingGroup" />
+        </EntityType>
+        <EntityType Name="Inhabitant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingId" Type="Int32" />
+          <Property Name="FlatNum" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Building" Relationship="Self.FK__Inhabitan__Build__5535A963" FromRole="Inhabitant" ToRole="Building" />
+          <NavigationProperty Name="Dept" Relationship="Self.FK__Dept__Inhabitant__5812160E" FromRole="Inhabitant" ToRole="Dept" />
+          <NavigationProperty Name="PaymentBill" Relationship="Self.FK__PaymentBi__Inhab__5EBF139D" FromRole="Inhabitant" ToRole="PaymentBill" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__Inhabit__6383C8BA" FromRole="Inhabitant" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="PaymentBill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InhabitantId" Type="Int32" />
+          <Property Name="BuildingId" Type="Int32" />
+          <Property Name="Period" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AmountDept" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AmountPayed" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Building" Relationship="Self.FK__PaymentBi__Build__5FB337D6" FromRole="PaymentBill" ToRole="Building" />
+          <NavigationProperty Name="Inhabitant" Relationship="Self.FK__PaymentBi__Inhab__5EBF139D" FromRole="PaymentBill" ToRole="Inhabitant" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__Positi__5AEE82B9" FromRole="Position" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequestText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingId" Type="Int32" />
+          <Property Name="InhabitantId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="Building" Relationship="Self.FK__Request__Buildin__628FA481" FromRole="Request" ToRole="Building" />
+          <NavigationProperty Name="Inhabitant" Relationship="Self.FK__Request__Inhabit__6383C8BA" FromRole="Request" ToRole="Inhabitant" />
+          <NavigationProperty Name="RequestStatus" Relationship="Self.FK__Request__StatusI__6477ECF3" FromRole="Request" ToRole="RequestStatus" />
+          <NavigationProperty Name="RequestExecution" Relationship="Self.FK__RequestEx__Reque__6754599E" FromRole="Request" ToRole="RequestExecution" />
+        </EntityType>
+        <EntityType Name="RequestExecution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateEnd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__RequestEx__Reque__6754599E" FromRole="RequestExecution" ToRole="Request" />
+          <NavigationProperty Name="WorkingGroup" Relationship="Self.FK__WorkingGr__Reque__6A30C649" FromRole="RequestExecution" ToRole="WorkingGroup" />
+        </EntityType>
+        <EntityType Name="RequestStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__StatusI__6477ECF3" FromRole="RequestStatus" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__RoleId__5BE2A6F2" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WorkingGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestExecutionId" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__WorkingGr__Emplo__6B24EA82" FromRole="WorkingGroup" ToRole="Employee" />
+          <NavigationProperty Name="RequestExecution" Relationship="Self.FK__WorkingGr__Reque__6A30C649" FromRole="WorkingGroup" ToRole="RequestExecution" />
+        </EntityType>
+        <Association Name="FK__Building__Status__52593CB8">
+          <End Role="BuildingStatus" Type="Self.BuildingStatus" Multiplicity="0..1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inhabitan__Build__5535A963">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inhabitant">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentBi__Build__5FB337D6">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="PaymentBill" Type="Self.PaymentBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentBill">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__Buildin__628FA481">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dept__Inhabitant__5812160E">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dept">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Positi__5AEE82B9">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__RoleId__5BE2A6F2">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkingGr__Emplo__6B24EA82">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="WorkingGroup" Type="Self.WorkingGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingGroup">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentBi__Inhab__5EBF139D">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="PaymentBill" Type="Self.PaymentBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentBill">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__Inhabit__6383C8BA">
+          <End Role="Inhabitant" Type="Self.Inhabitant" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inhabitant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="InhabitantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__StatusI__6477ECF3">
+          <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestEx__Reque__6754599E">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
+          <End Role="RequestExecution" Type="Self.RequestExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestExecution">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkingGr__Reque__6A30C649">
+          <End Role="RequestExecution" Type="Self.RequestExecution" Multiplicity="0..1" />
+          <End Role="WorkingGroup" Type="Self.WorkingGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestExecution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingGroup">
+              <PropertyRef Name="RequestExecutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Building" EntityType="Self.Building" />
+          <EntitySet Name="BuildingStatus" EntityType="Self.BuildingStatus" />
+          <EntitySet Name="Dept" EntityType="Self.Dept" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Inhabitant" EntityType="Self.Inhabitant" />
+          <EntitySet Name="PaymentBill" EntityType="Self.PaymentBill" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="RequestExecution" EntityType="Self.RequestExecution" />
+          <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="WorkingGroup" EntityType="Self.WorkingGroup" />
+          <AssociationSet Name="FK__Building__Status__52593CB8" Association="Self.FK__Building__Status__52593CB8">
+            <End Role="BuildingStatus" EntitySet="BuildingStatus" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inhabitan__Build__5535A963" Association="Self.FK__Inhabitan__Build__5535A963">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentBi__Build__5FB337D6" Association="Self.FK__PaymentBi__Build__5FB337D6">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="PaymentBill" EntitySet="PaymentBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__Buildin__628FA481" Association="Self.FK__Request__Buildin__628FA481">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dept__Inhabitant__5812160E" Association="Self.FK__Dept__Inhabitant__5812160E">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="Dept" EntitySet="Dept" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Positi__5AEE82B9" Association="Self.FK__Employee__Positi__5AEE82B9">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__RoleId__5BE2A6F2" Association="Self.FK__Employee__RoleId__5BE2A6F2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkingGr__Emplo__6B24EA82" Association="Self.FK__WorkingGr__Emplo__6B24EA82">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorkingGroup" EntitySet="WorkingGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentBi__Inhab__5EBF139D" Association="Self.FK__PaymentBi__Inhab__5EBF139D">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="PaymentBill" EntitySet="PaymentBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__Inhabit__6383C8BA" Association="Self.FK__Request__Inhabit__6383C8BA">
+            <End Role="Inhabitant" EntitySet="Inhabitant" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__StatusI__6477ECF3" Association="Self.FK__Request__StatusI__6477ECF3">
+            <End Role="RequestStatus" EntitySet="RequestStatus" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestEx__Reque__6754599E" Association="Self.FK__RequestEx__Reque__6754599E">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="RequestExecution" EntitySet="RequestExecution" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkingGr__Reque__6A30C649" Association="Self.FK__WorkingGr__Reque__6A30C649">
+            <End Role="RequestExecution" EntitySet="RequestExecution" />
+            <End Role="WorkingGroup" EntitySet="WorkingGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Up0101ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Building">
+            <EntityTypeMapping TypeName="Up0101Model.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StairsAmount" ColumnName="StairsAmount" />
+                <ScalarProperty Name="FlatsAmount" ColumnName="FlatsAmount" />
+                <ScalarProperty Name="Square" ColumnName="Square" />
+                <ScalarProperty Name="BuiltYear" ColumnName="BuiltYear" />
+                <ScalarProperty Name="InServiceFromYear" ColumnName="InServiceFromYear" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildingStatus">
+            <EntityTypeMapping TypeName="Up0101Model.BuildingStatus">
+              <MappingFragment StoreEntitySet="BuildingStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dept">
+            <EntityTypeMapping TypeName="Up0101Model.Dept">
+              <MappingFragment StoreEntitySet="Dept">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InhabitantId" ColumnName="InhabitantId" />
+                <ScalarProperty Name="WaterAmount" ColumnName="WaterAmount" />
+                <ScalarProperty Name="ElectricityAmount" ColumnName="ElectricityAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="Up0101Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inhabitant">
+            <EntityTypeMapping TypeName="Up0101Model.Inhabitant">
+              <MappingFragment StoreEntitySet="Inhabitant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="FlatNum" ColumnName="FlatNum" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentBill">
+            <EntityTypeMapping TypeName="Up0101Model.PaymentBill">
+              <MappingFragment StoreEntitySet="PaymentBill">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InhabitantId" ColumnName="InhabitantId" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="AmountDept" ColumnName="AmountDept" />
+                <ScalarProperty Name="AmountPayed" ColumnName="AmountPayed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="Up0101Model.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="Up0101Model.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="RequestText" ColumnName="RequestText" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="InhabitantId" ColumnName="InhabitantId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestExecution">
+            <EntityTypeMapping TypeName="Up0101Model.RequestExecution">
+              <MappingFragment StoreEntitySet="RequestExecution">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestStatus">
+            <EntityTypeMapping TypeName="Up0101Model.RequestStatus">
+              <MappingFragment StoreEntitySet="RequestStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Up0101Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Up0101Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingGroup">
+            <EntityTypeMapping TypeName="Up0101Model.WorkingGroup">
+              <MappingFragment StoreEntitySet="WorkingGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestExecutionId" ColumnName="RequestExecutionId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,81 @@
+﻿<Window x:Class="HousingManagementApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HousingManagementApp"
+        mc:Ignorable="d"
+        Title="Управление Заявками" Height="450" Width="800"
+        Icon="/Icon.ico">
+    <Window.Resources>
+        <!-- Подключение внешнего ResourceDictionary с стилями -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Логотип -->
+        <Image Source="/logo.png"
+               Height="60" 
+               HorizontalAlignment="Left" 
+               Margin="10,5,0,10"
+               Style="{StaticResource CompanyLogoStyle}"
+               Grid.Row="0"/>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Список Заявок" 
+                   FontSize="20" 
+                   Style="{StaticResource PageHeaderText}"
+                   Grid.Row="0" 
+                   HorizontalAlignment="Center" 
+                   Margin="10"/>
+
+        <!-- DataGrid со стилем -->
+        <DataGrid x:Name="RequestsGrid" 
+                  Grid.Row="1" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True" 
+                  SelectionChanged="RequestsGrid_SelectionChanged"
+                  Style="{StaticResource PageDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Дата Создания" Binding="{Binding CreationDate}"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding RequestText}"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Building.Address}"/>
+                <DataGridTextColumn Header="Заявитель" Binding="{Binding Inhabitant.FullName}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Inhabitant.PhoneNum}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status.Description}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель кнопок -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,10">
+            <Button Content="Добавить" 
+                    Click="AddButton_Click" 
+                    Style="{StaticResource PageButton}"/>
+            <Button Content="Редактировать" 
+                    Click="EditButton_Click" 
+                    Style="{StaticResource PageButton}"/>
+            <Button Content="Удалить" 
+                    Click="DeleteButton_Click" 
+                    Style="{StaticResource PageButton}"/>
+            <Button Content="История по Сотрудникам" 
+                    Click="HistoryByEmployee_Click" 
+                    Style="{StaticResource PageButton}"/>
+            <Button Content="История по Адресам" 
+                    Click="HistoryByAddress_Click" 
+                    Style="{StaticResource PageButton}"/>
+        </StackPanel>
+    </Grid>
+</Window>

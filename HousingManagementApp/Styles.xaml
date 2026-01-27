@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =====================================================================
+         Цвета согласно руководству по стилю
+    ====================================================================== -->
+    <SolidColorBrush x:Key="MainBackground"        Color="#FFFFFF" />
+    <!-- Основной фон -->
+    <SolidColorBrush x:Key="SecondaryBackground"   Color="#F4E8D3" />
+    <!-- Дополнительный фон -->
+    <SolidColorBrush x:Key="AccentColor"           Color="#67BA80" />
+    <!-- Акцентирование внимания / основная кнопка -->
+    <SolidColorBrush x:Key="AccentHoverColor"      Color="#8CCFA3" />
+    <!-- Hover-вариант акцента (чуть светлее) -->
+    <SolidColorBrush x:Key="TextPrimary"           Color="#1A1A1A" />
+    <!-- Основной текст -->
+    <SolidColorBrush x:Key="TextSecondary"         Color="#4A4A4A" />
+    <!-- Вторичный текст -->
+    <SolidColorBrush x:Key="BorderBrushLight"      Color="#E0E0E0" />
+    <!-- Границы, разделители -->
+
+    <!-- =====================================================================
+         Шрифты
+    ====================================================================== -->
+    <FontFamily x:Key="AppFont">Segoe UI</FontFamily>
+    <FontFamily x:Key="AppFontSemiBold">Segoe UI Semibold</FontFamily>
+    <FontFamily x:Key="AppFontBold">Segoe UI Bold</FontFamily>
+
+    <!-- =====================================================================
+         Стиль кнопок (основное действие — зелёный #67BA80)
+    ====================================================================== -->
+    <Style TargetType="Button" x:Key="PageButton">
+        <Setter Property="Background" Value="{StaticResource AccentColor}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="6"
+                            BorderThickness="0">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource AccentHoverColor}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#55A06D" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#D0D0D0" />
+                            <Setter Property="Foreground" Value="#909090" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- =====================================================================
+         Заголовок страницы / окна
+    ====================================================================== -->
+    <Style x:Key="PageHeaderText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource AppFontSemiBold}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Foreground" Value="{StaticResource AccentColor}" />
+        <Setter Property="Margin" Value="0,12,0,20" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!-- =====================================================================
+         Обычный заголовок / подзаголовок
+    ====================================================================== -->
+    <Style x:Key="SectionHeaderText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource AppFontSemiBold}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+        <Setter Property="Margin" Value="0,16,0,8" />
+    </Style>
+
+    <!-- =====================================================================
+         DataGrid
+    ====================================================================== -->
+    <Style TargetType="DataGrid" x:Key="PageDataGrid">
+        <Setter Property="Background" Value="{StaticResource MainBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushLight}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#E8E8E8" />
+        <Setter Property="RowBackground" Value="White" />
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource SecondaryBackground}" />
+        <Setter Property="Margin" Value="0,8,0,12" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+    </Style>
+
+    <!-- =====================================================================
+         Логотип компании (не искажать пропорции!)
+    ====================================================================== -->
+    <Style x:Key="CompanyLogoStyle" TargetType="Image">
+        <Setter Property="Stretch" Value="Uniform" />           <!-- сохраняем пропорции -->
+        <Setter Property="Height" Value="56" />
+        <Setter Property="Margin" Value="16,12" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <!-- =====================================================================
+         ComboBox / Select
+    ====================================================================== -->
+    <Style TargetType="ComboBox" x:Key="ComboBox">
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Margin" Value="0,4,0,8" />
+        <Setter Property="MinWidth" Value="180" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushLight}" />
+    </Style>
+
+    <!-- =====================================================================
+         TextBox / ввод текста
+    ====================================================================== -->
+    <Style TargetType="TextBox" x:Key="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Margin" Value="0,4,0,8" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushLight}" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+</ResourceDictionary>

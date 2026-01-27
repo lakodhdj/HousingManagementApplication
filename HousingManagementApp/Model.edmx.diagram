@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41b72aceb9794425bad16835ed3bcc65" Name="Diagram1">
+        <EntityTypeShape EntityType="Up0101Model.Building" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.BuildingStatus" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Dept" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Employee" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Inhabitant" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.PaymentBill" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Position" Width="1.5" PointX="10.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Request" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.RequestExecution" Width="1.5" PointX="12.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.RequestStatus" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.Role" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Up0101Model.WorkingGroup" Width="1.5" PointX="15" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="Up0101Model.FK__Building__Status__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Inhabitan__Build__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__PaymentBi__Build__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Request__Buildin__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Dept__Inhabitant__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Employee__Positi__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Employee__RoleId__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__WorkingGr__Emplo__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__PaymentBi__Inhab__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Request__Inhabit__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__Request__StatusI__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__RequestEx__Reque__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="Up0101Model.FK__WorkingGr__Reque__6A30C649" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
